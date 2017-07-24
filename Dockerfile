@@ -1,7 +1,9 @@
-FROM alpine:3.1
-RUN apk add --update python py-pip
-RUN pip install Flask
-RUN pip install -r requirments.txt
+FROM ubuntu:latest
+MAINTAINER Vikas Navgire "viki.81188@gmail.com"
+RUN apt-get update -y
+RUN apt-get install -y python-pip python-dev build-essential
 COPY . /app
-EXPOSE  5000
-CMD ["python", "/app/app.py", "-p 5000"]
+WORKDIR /app
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python"]
+CMD ["app.py"]
