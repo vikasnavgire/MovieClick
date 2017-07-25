@@ -11,7 +11,8 @@ def add_movie_info(data):
             db.session.commit()
             return "Movie details added successfully ..."
         except Exception as e:
-            return "Please check input details or duplicate values" + str(e)
+            db.session.rollback()
+            return "Please check input details or duplicate values # " + str(e)
 
 
 def add_actor_info(data):

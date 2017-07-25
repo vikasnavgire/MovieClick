@@ -7,6 +7,7 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
+""" app route """
 
 @app.route('/addMovie', methods=['POST'])
 def add_movie():
@@ -33,11 +34,12 @@ def show_movie():
     else:
         return 'Invalid methods'
 
+
 @app.route('/actorMovie', methods=['GET', 'POST'])
 def actor_movie():
     if request.method == 'POST' or request.method == 'GET':
         data = json.loads(request.data)
-        return jsonify(get_movies_by_actor_id(data))
+        return jsonify(get_movie_by_actor_id(data))
     else:
         return 'Invalid methods'
 
@@ -65,5 +67,5 @@ def index():
     return "Welcome to Movie selector API"
 
 if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
+    #db.create_all()
+    app.run(host='0.0.0.0')
